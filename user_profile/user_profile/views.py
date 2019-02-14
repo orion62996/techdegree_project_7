@@ -11,21 +11,33 @@ def index(request):
     return render(request, 'index.html')
 
 
-def register(request):
-    form = forms.RegisteredUserForm()
+# def register(request):
+#     form = forms.RegisteredUserForm()
+#     if request.method == 'POST':
+#         form = forms.RegisteredUserForm(request.POST)
+#         if form.is_valid():
+#             messages.add_message(request, messages.SUCCESS, "Form submitted")
+#             return HttpResponseRedirect(reverse('index'))
+#     return render(request, 'registration_form.html', {'form': form})
+
+
+# def user_profile_view(request):
+#     form = forms.UserProfileForm()
+#     if request.method == 'POST':
+#         form = forms.UserProfileForm(request.POST)
+#         if form.is_valid():
+#             messages.add_message(request, messages.SUCCESS, "Form submitted")
+#             return HttpResponseRedirect(reverse('user_profile'))
+#     return render (request, 'user_profile_form.html', {'form': form})
+
+
+def sign_up(request):
+    form = forms.SignUpForm()
     if request.method == 'POST':
-        form = forms.RegisteredUserForm(request.POST)
+        form = forms.SignUpForm(request.POST)
         if form.is_valid():
-            messages.add_message(request, messages.SUCCESS, "Form submitted")
+            messages.add_message(request,
+                                 message.SUCCESS,
+                                 "You have been successfully registered!")
             return HttpResponseRedirect(reverse('index'))
-    return render(request, 'registration_form.html', {'form': form})
-
-
-def user_profile_view(request):
-    form = forms.UserProfileForm()
-    if request.method == 'POST':
-        form = forms.UserProfileForm(request.POST)
-        if form.is_valid():
-            messages.add_message(request, messages.SUCCESS, "Form submitted")
-            return HttpResponseRedirect(reverse('user_profile'))
-    return render (request, 'user_profile_form.html', {'form': form})
+    return render(request, 'sign_up_form.html', {'form': form})

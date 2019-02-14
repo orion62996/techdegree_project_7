@@ -7,33 +7,15 @@ def must_be_empty(value):
         raise forms.ValidationError('Is not empty')
 
 
-class RegisteredUserForm(forms.Form):
+class SignUpForm(forms.Form):
     username = forms.CharField()
-    password = forms.CharField()
-    validate_password = forms.CharField()
-    honeypot = forms.CharField(required=False,
-                               widget=forms.HiddenInput,
-                               label="Leave this blank",
-                               validators=[must_be_empty])
+    password = forms.CharField(widget=forms.PasswordInput())
+    varify_password = forms.CharField(widget=forms.PasswordInput())
 
     def clean(self):
         cleaned_data = super().clean()
-        email = cleaned_data.get('password')
-        varify = cleaned_data.get('validate_password')
-        if email != varify:
-            raise forms.ValidationError("The passwords do not match")
+        password = cleaned_data.get('password')
+        verify = cleaned_data.get('verify_password')
 
-
-class UserProfileForm(forms.Form):
-    username = forms.CharField()
-    first_name = forms.CharField()
-    last_name = forms.CharField()
-    birthday = forms.DateField()
-    email = forms.EmailField()
-    bio = forms.CharField(widget=forms.Textarea)
-    location = forms.CharField()
-    ice_cream_flavor = forms.CharField()
-    honeypot = forms.CharField(required=False,
-                               widget=forms.HiddenInput,
-                               label="Leave this blank",
-                               validators=[must_be_empty])
+        if password != verify:
+            raise forms.ValidationError("You did not enter the same password in both fields")
