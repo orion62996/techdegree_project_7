@@ -1,0 +1,29 @@
+{% load static from staticfiles %}
+
+<!doctype HTML>
+
+<html>
+  <head>
+    <title>{% block title %}{% endblock %}</title>
+    <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  </head>
+  <nav>
+    {% if messages %}
+        <div class="container">
+            <div class="">
+                {% for message in messages %}
+                    <div data-alert class="">
+                        {{ message }}
+                        <a href="#" class="">x</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+  </nav>
+  <body>
+    {% block content %}{% endblock %}
+  </body>
+</html>
