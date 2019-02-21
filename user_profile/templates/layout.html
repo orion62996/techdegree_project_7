@@ -1,29 +1,30 @@
 {% load static from staticfiles %}
 
-<!doctype HTML>
+<!DOCTYPE html>
 
 <html>
   <head>
+    <meta charset="utf-8">
     <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-  </head>
-  <nav>
-    {% if messages %}
-        <div class="container">
-            <div class="">
-                {% for message in messages %}
-                    <div data-alert class="">
-                        {{ message }}
-                        <a href="#" class="">x</a>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-    {% endif %}
-  </nav>
+    <link rel="stylesheet" href="{% static "css/global.css" %}">
   <body>
+    <div class="bounds">
+      {% if messages %}
+          <div class="container">
+              <div class="">
+                  {% for message in messages %}
+                      <div data-alert class="">
+                          {{ message }}
+                          <a href="#" class="">x</a>
+                      </div>
+                  {% endfor %}
+              </div>
+          </div>
+      {% endif %}
+    </div>
     {% block content %}{% endblock %}
   </body>
 </html>
