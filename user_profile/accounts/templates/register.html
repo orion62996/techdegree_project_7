@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="bounds">
+  <div class="">
+    <form action="" method="POST" class="">
+      {{ form.as_p }}
+      {% csrf_token %}
+      <input type="Submit" class="btn-primary">
+    </form>
+  </div>
+</div>
+{% endblock %}
