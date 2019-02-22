@@ -10,10 +10,10 @@ from . import forms
 
 def register(request):
     """Display the registration form."""
-    form = UserCreationForm()
+    form = forms.RegistrationForm()
 
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = forms.RegistrationForm(request.POST)
         if form.is_valid():
             new_user = form.save(commit=False)
             new_user.save()
