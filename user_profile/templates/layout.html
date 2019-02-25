@@ -30,9 +30,9 @@
         <li><a href="{% url 'index' %}">Home</a></li>
         {% if not user.is_authenticated %}
           <li><a href="/">Register</a></li>
-          <li><a href="/">Login</a></li>
+          <li><a href="{% url 'accounts:login' %}">Login</a></li>
         {% else %}
-          <li><a href="/">Logout</a></li>
+          <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
         {% endif %}
         <li><a href="/">Profile</a></li>
       </ul>

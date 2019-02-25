@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
@@ -29,3 +30,9 @@ def sign_in(request):
                     "Username or password is incorrect."
                 )
     return render(request, 'accounts/login.html', {'form': form})
+
+
+def sign_out(request):
+    logout(request)
+    messages.success(request, "You've been signed out. Come back soon!")
+    return HttpResponseRedirect(reverse('index'))
