@@ -1,6 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
@@ -30,6 +30,27 @@ def sign_in(request):
                     "Username or password is incorrect."
                 )
     return render(request, 'accounts/login.html', {'form': form})
+
+
+def register(request):
+    """Create new user account."""
+    form = UserCreationForm()
+    if request.method == 'POST':
+        form = UserCreationForm(data=request.POST)
+        if form.is_valid():
+            form.save()
+            user = authenticate(
+                username = form.cleaned_data['username'],
+                password = form.cleaned_data['password1']
+            )
+            login(request, user)
+            messages.success(
+                request,
+                "You have successfully created a new account and are " +
+                "now logged in as {}.".format(user.username)
+            )
+            return HttpResponseRedirect(reverse('index'))
+    return render(request, 'accounts/register.html', {'form': form})
 
 
 def sign_out(request):
