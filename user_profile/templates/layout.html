@@ -10,22 +10,23 @@
     <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{% static "css/global.css" %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <body>
-    <div class="bounds">
+    <div class="container">
       {% if messages %}
           <div class="container">
               <div class="">
                   {% for message in messages %}
-                      <div data-alert class="">
+                      <div class="alert alert-{{ message.tags }}">
                           {{ message }}
-                          <a href="#" class="">x</a>
                       </div>
                   {% endfor %}
               </div>
           </div>
       {% endif %}
     </div>
-    <nav class="bounds">
+    <nav class="container">
       <ul>
         <li><a href="{% url 'index' %}">Home</a></li>
         {% if not user.is_authenticated %}
@@ -34,9 +35,11 @@
         {% else %}
           <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
         {% endif %}
-        <li><a href="/">Profile</a></li>
+        <li><a href="{% url 'accounts:profile' %}">Profile</a></li>
       </ul>
     </nav>
-    {% block content %}{% endblock %}
+      <div class="container">
+        {% block content %}{% endblock %}
+      </div>
   </body>
 </html>

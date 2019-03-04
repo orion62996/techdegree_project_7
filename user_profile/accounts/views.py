@@ -1,9 +1,14 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
+from django.db import transaction
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+
+from . import forms
+from . import models
 
 
 def sign_in(request):
@@ -16,6 +21,7 @@ def sign_in(request):
                 user = form.user_cache
                 if user.is_active:
                     login(request, user)
+                    messages.success(request, f"You are now logged in as {user.username}")
                     return HttpResponseRedirect(
                         reverse('index')
                     )
@@ -34,20 +40,21 @@ def sign_in(request):
 
 def register(request):
     """Create new user account."""
-    form = UserCreationForm()
+    form = forms.UserRegisterForm()
     if request.method == 'POST':
-        form = UserCreationForm(data=request.POST)
+        form = forms.UserRegisterForm(data=request.POST)
         if form.is_valid():
             form.save()
             user = authenticate(
                 username = form.cleaned_data['username'],
-                password = form.cleaned_data['password1']
+                email = form.cleaned_data['email'],
+                password = form.cleaned_data['password1'],
             )
             login(request, user)
             messages.success(
                 request,
                 "You have successfully created a new account and are " +
-                "now logged in as {}.".format(user.username)
+                f"now logged in as {user.username}."
             )
             return HttpResponseRedirect(reverse('index'))
     return render(request, 'accounts/register.html', {'form': form})
@@ -57,3 +64,35 @@ def sign_out(request):
     logout(request)
     messages.success(request, "You've been signed out. Come back soon!")
     return HttpResponseRedirect(reverse('index'))
+
+
+@login_required
+def profile(request):
+    """Display the details of the user's profile."""
+    user = request.user
+    user_profile = get_object_or_404(models.UserProfile, user_id=user.id)
+    return render(request,
+                  'accounts/profile.html',
+                  {'user': user, 'user_profile': user_profile})
+
+
+@login_required
+def edit_profile(request):
+    """Display the details of the user's profile."""
+    if request.method == 'POST':
+        user_update_form = forms.UserUpdateForm(request.POST, instance=request.user)
+        user_profile_update_form = forms.UserProfileUpdateForm(request.POST, request.FILES, instance=request.user.userprofile)
+        if user_update_form.is_valid() and user_profile_update_form.is_valid():
+            user_update_form.save()
+            user_profile_update_form.save()
+            messages.success(request, "Your profile has been updated!")
+            return HttpResponseRedirect(reverse('accounts:profile'))
+    else:
+        user_update_form = forms.UserUpdateForm(instance=request.user)
+        user_profile_update_form = forms.UserProfileUpdateForm(instance=request.user.userprofile)
+    return render(request,
+                  'accounts/edit_profile.html',
+                  {
+        'user_update_form': user_update_form,
+        'user_profile_update_form': user_profile_update_form
+    })
