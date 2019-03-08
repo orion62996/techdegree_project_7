@@ -1,20 +1,32 @@
 {% extends 'layout.html' %}
 
-{% block title %}Profile{% endblock %}
+{% block title %}{{ user.first_name }} {{ user.last_name }}'s Profile{% endblock %}
 
 {% block content %}
-  <img class="account-img" src='{{ user.userprofile.avatar.url }}'>
   <h1>Profile</h1>
-  <h2>First Name</h2>
-  <p>{{ user.first_name }}</p>
-  <h2>Last Name</h2>
-  <p>{{ user.last_name }}</p>
-  <h2>Email</h2>
+  <img class="account-img" src='{{ user.userprofile.avatar.url }}'>
+  <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+  {% if user.email %}
+  <h3>Email</h3>
   <p>{{ user.email }}</p>
-  <h2>Location</h2>
+  {% endif %}
+  {% if user_profile.bio %}
+  <h3>Bio</h3>
+  <p>{{ user_profile.bio }}</p>
+  {% endif %}
+  {% if user_profile.dob %}
+  <h3>DOB</h3>
+  <p>{{ user_profile.dob }}</p>
+  {% endif %}
+  <h3>Location</h3>
   <p>{{ user_profile.location }}</p>
-  <h2>Ice Cream Flavor</h2>
+  {% if user_profile.ice_cream_flavor %}
+  <h3>Ice Cream Flavor</h3>
   <p>{{ user_profile.ice_cream_flavor }}</p>
+  {% endif %}
+
+  <hr>
 
   <p><a href="{% url 'accounts:edit' %}">Edit your profile</a></p>
+  <p><a href="{% url 'accounts:change_password' %}">Change password</a></p>
 {% endblock %}

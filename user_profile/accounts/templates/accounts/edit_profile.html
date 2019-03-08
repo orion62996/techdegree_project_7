@@ -6,8 +6,10 @@
   <h1>Edit Profile</h1>
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
+    <img class="account-img" src='{{ user.userprofile.avatar.url }}'>
+    {{ user_avatar_form.as_p }}
     {{ user_update_form.as_p }}
     {{ user_profile_update_form.as_p }}
-    <button class="btn btn-outline-info" type="submit">Edit Profile</button>
+    <button class="btn btn-outline-info" type="submit">Save Changes</button>
   </form>
 {% endblock %}
