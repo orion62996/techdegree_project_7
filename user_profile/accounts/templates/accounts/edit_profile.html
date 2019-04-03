@@ -1,5 +1,7 @@
 {% extends 'layout.html' %}
 
+{% load crispy_forms_tags %}
+
 {% block title %}Edit Profile{% endblock %}
 
 {% block content %}
@@ -7,9 +9,9 @@
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     <img class="account-img" src='{{ user.userprofile.avatar.url }}'>
-    {{ user_avatar_form.as_p }}
-    {{ user_update_form.as_p }}
-    {{ user_profile_update_form.as_p }}
-    <button class="btn btn-outline-info" type="submit">Save Changes</button>
+    {{ user_avatar_form|crispy }}
+    {{ user_update_form|crispy }}
+    {{ user_profile_update_form|crispy }}
+    <button class="btn btn-primary" type="submit">Save Changes</button>
   </form>
 {% endblock %}

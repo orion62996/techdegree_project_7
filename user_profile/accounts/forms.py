@@ -72,9 +72,6 @@ class UserProfileUpdateForm(forms.ModelForm):
             'location',
             'ice_cream_flavor',
         )
-        widgets = {
-            'dob': forms.SelectDateWidget(years=range(1900, 2020))
-        }
 
 
 class UserAvatarForm(forms.ModelForm):

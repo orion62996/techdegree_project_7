@@ -5,7 +5,11 @@
 
 {% block content %}
   <div class="jumbotron bg-primary" style="margin-bottom: 0px">
-    <h1 class="text-center text-white">Sign up and create a profile!</h1>
-    <p class="text-center text-white"><a class="text-white-50" href="{% url 'accounts:register' %}">Register</a> a new account, or <a class="text-white-50" href="{% url 'accounts:login' %}">login</a> if you already have one.</p>
+    {% if user.is_authenticated %}
+      <h1 class="text-center text-white">Hello {{ user.username }}!</h1>
+    {% else %}
+      <h1 class="text-center text-white">Sign up and create a profile!</h1>
+      <p class="text-center text-white"><a class="text-white-50" href="{% url 'accounts:register' %}">Register</a> a new account, or <a class="text-white-50" href="{% url 'accounts:login' %}">login</a> if you already have one.</p>
+    {% endif %}
   </div>
 {% endblock %}
