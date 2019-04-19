@@ -13,3 +13,18 @@
     <button class="btn btn-primary" type="submit">Register</button>
   </form>
 {% endblock %}
+
+{% block js %}
+  <script>
+  // Create meter element on password field
+  var passwordField = document.getElementById('div_id_password1');
+  var passwordInput = document.querySelector('[name=password1]');
+  var passwordMeter = document.createElement('meter');
+  passwordMeter.setAttribute('max', '4');
+  passwordField.appendChild(passwordMeter);
+
+  passwordInput.addEventListener('keypress', function() {
+    passwordMeter.setAttribute('value', '2')
+  })
+  </script>
+{% endblock %}

@@ -14,11 +14,17 @@ class UserRegisterForm(UserCreationForm):
         label=_("Password"),
         strip=False,
         widget=forms.PasswordInput,
-        help_text="""<ul><li>Your password can't be too similar to your other
-            personal information.</li><li>Your password must contain at least
-            14 characters.</li> <li>Your password can't be a commonly used
-            password.</li> <li>Your password can't be entirely
-            numeric.</li></ul>"""
+        help_text="""
+        <ul>
+            <li>Your password must contain at least 14 characters.</li>
+            <li>Your password must contain uppercase and lowercase letters.</li>
+            <li>Your password must contain at least one numeric digit.</li>
+            <li>Your password must contain at least one special character.</li>
+            <li>Your password can't be too similar to your other personal information.</li>
+            <li>Your password can't be a commonly used password.</li>
+            <li>Your password can't be entirely numeric.</li>
+        </ul>
+        """
     )
 
     class Meta:
