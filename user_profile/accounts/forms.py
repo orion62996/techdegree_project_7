@@ -72,6 +72,11 @@ class UserProfileUpdateForm(forms.ModelForm):
             )
         )
 
+    dob = forms.DateField(
+        label = _("Date of Birth"),
+        help_text = "YYYY-MM-DD, MM/DD/YYYY, or MM/DD/YY"
+    )
+
     class Meta:
         model = models.UserProfile
         fields = (
