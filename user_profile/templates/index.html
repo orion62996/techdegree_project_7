@@ -9,6 +9,8 @@
       <h1 class="text-center text-white">Hello {{ user.username }}!</h1>
       {% if not user.first_name %}
         <p class="text-center text-white">Add some information to your <a class="text-white-50" href="{% url 'accounts:edit' %}">profile</a>!</p>
+      {% else %}
+        <p class="text-center text-white">Check out your <a class="text-white-50" href="{% url 'accounts:profile' %}">profile</a>!</p>
       {% endif %}
     {% else %}
       <h1 class="text-center text-white">Sign up and create a profile!</h1>

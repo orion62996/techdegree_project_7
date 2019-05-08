@@ -60,7 +60,7 @@ class ContainsSpecialCharacter(object):
     def validate(self, password, user=None):
         has_special_character = False
         for character in password:
-            if character in "!\"#$%&*'()+,./":
+            if character in "!\"#$%&*'()+,./-":
                 has_special_character = True
         if not has_special_character:
             raise ValidationError(
