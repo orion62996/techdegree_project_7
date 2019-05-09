@@ -4,7 +4,6 @@
 
 {% block content %}
 <div class="jumbotron bg-primary text-white text-center">
-  <img class="img-thumbnail" src='{{ user.userprofile.avatar.url }}'>
   <h1 class="display-4 mt-3 mb-n3">{{ user.first_name }} {{ user.last_name }}</h1>
 </div>
   {% if user.email %}

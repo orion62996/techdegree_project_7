@@ -8,8 +8,6 @@
   <h1>Edit Profile</h1>
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    <img class="account-img" src='{{ user.userprofile.avatar.url }}'>
-    {{ user_avatar_form|crispy }}
     {{ user_update_form|crispy }}
     {{ user_profile_update_form|crispy }}
     <button class="btn btn-primary" type="submit">Save Changes</button>

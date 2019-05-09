@@ -23,8 +23,6 @@ class UserRegisterForm(UserCreationForm):
             <li>Your password must contain uppercase and lowercase letters.</li>
             <li>Your password must contain at least one numeric digit.</li>
             <li>Your password must contain at least one special character.</li>
-
-
         </ul>
         """
     )
@@ -84,12 +82,4 @@ class UserProfileUpdateForm(forms.ModelForm):
             'bio',
             'location',
             'ice_cream_flavor',
-        )
-
-
-class UserAvatarForm(forms.ModelForm):
-    class Meta:
-        model = models.UserProfile
-        fields = (
-            'avatar',
         )
