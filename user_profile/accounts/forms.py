@@ -1,3 +1,4 @@
+from bootstrap_datepicker_plus import DatePickerInput
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
@@ -37,16 +38,6 @@ class UserRegisterForm(UserCreationForm):
         )
 
 
-class UserForm(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = (
-            'first_name',
-            'last_name',
-            'email',
-        )
-
-
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
 
@@ -71,8 +62,9 @@ class UserProfileUpdateForm(forms.ModelForm):
         )
 
     dob = forms.DateField(
+        widget = DatePickerInput(format='%m/%d/%Y'),
         label = _("Date of Birth"),
-        help_text = "YYYY-MM-DD, MM/DD/YYYY, or MM/DD/YY"
+        required = False,
     )
 
     class Meta:

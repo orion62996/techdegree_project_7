@@ -27,7 +27,7 @@ def sign_in(request):
                         f"You are now logged in as {user.username}"
                     )
                     return HttpResponseRedirect(
-                        reverse('index')
+                        reverse('accounts:profile')
                     )
                 else:
                     messages.error(

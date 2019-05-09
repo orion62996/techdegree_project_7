@@ -18,8 +18,10 @@
   <h3>DOB</h3>
   <p>{{ user_profile.dob }}</p>
   {% endif %}
+  {% if user_profile.location %}
   <h3>Location</h3>
   <p>{{ user_profile.location }}</p>
+  {% endif %}
   {% if user_profile.ice_cream_flavor %}
   <h3>Ice Cream Flavor</h3>
   <p>{{ user_profile.ice_cream_flavor }}</p>
