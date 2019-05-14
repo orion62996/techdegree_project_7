@@ -136,15 +136,3 @@ def change_password(request):
     else:
         form = forms.PasswordChangeForm(request.user)
     return render(request, 'accounts/change_password.html', {'form': form})
-
-
-def photo_list(request):
-    photos = models.Photo.objects.all()
-    if request.method == 'POST':
-        form = forms.PhotoForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('accounts:edit_photo'))
-    else:
-        form = forms.PhotoForm()
-    return render(request, 'accounts/photo_list.html', {'form': form, 'photos': photos})

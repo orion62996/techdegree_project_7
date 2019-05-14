@@ -28,6 +28,5 @@ urlpatterns = [
     path('profile/edit/', views.edit_profile, name='edit'),
     path('register/', views.register, name='register'),
     path('change-password/', views.change_password, name='change_password'),
-    path('edit-photo/', views.photo_list, name='edit_photo'),
 ]
 urlpatterns += staticfiles_urlpatterns()
