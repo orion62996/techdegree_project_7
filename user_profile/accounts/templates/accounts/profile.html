@@ -12,7 +12,7 @@
   {% endif %}
   {% if user_profile.bio %}
   <h3>Bio</h3>
-  <p>{{ user_profile.bio }}</p>
+  <p>{{ user_profile.bio|safe }}</p>
   {% endif %}
   {% if user_profile.dob %}
   <h3>DOB</h3>

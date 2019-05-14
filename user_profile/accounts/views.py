@@ -92,10 +92,14 @@ def profile(request):
 
 @login_required
 def edit_profile(request):
-    """Display the details of the user's profile."""
+    """Edit the details of the user's profile."""
     if request.method == 'POST':
-        user_update_form = forms.UserUpdateForm(request.POST, instance=request.user)
-        user_profile_update_form = forms.UserProfileUpdateForm(request.POST, instance=request.user.userprofile)
+        user_update_form = forms.UserUpdateForm(request.POST,
+                                                instance=request.user)
+        user_profile_update_form = forms.UserProfileUpdateForm(
+            request.POST,
+            instance=request.user.userprofile
+        )
         if user_update_form.is_valid() and user_profile_update_form.is_valid():
             user_update_form.save()
             user_profile_update_form.save()
@@ -103,7 +107,9 @@ def edit_profile(request):
             return HttpResponseRedirect(reverse('accounts:profile'))
     else:
         user_update_form = forms.UserUpdateForm(instance=request.user)
-        user_profile_update_form = forms.UserProfileUpdateForm(instance=request.user.userprofile)
+        user_profile_update_form = forms.UserProfileUpdateForm(
+            instance=request.user.userprofile
+        )
     return render(request,
                   'accounts/edit_profile.html',
                   {

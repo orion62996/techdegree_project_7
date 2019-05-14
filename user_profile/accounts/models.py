@@ -1,12 +1,13 @@
 from django.contrib.auth.models import User
 from django.db import models
 from PIL import Image
+from tinymce.models import HTMLField
 
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     dob = models.DateField(null=True, blank=True)
-    bio = models.TextField(blank=True)
+    bio = HTML(blank=True)
     location = models.CharField(max_length=255, blank=True)
     ice_cream_flavor = models.CharField(max_length=255, blank=True)
 
