@@ -94,20 +94,33 @@ def profile(request):
 def edit_profile(request):
     """Edit the details of the user's profile."""
     if request.method == 'POST':
-        user_update_form = forms.UserUpdateForm(request.POST,
-                                                instance=request.user)
+        user_update_form = forms.UserUpdateForm(
+            request.POST,
+            instance=request.user
+        )
         user_profile_update_form = forms.UserProfileUpdateForm(
             request.POST,
+            instance=request.user.userprofile
+        )
+        user_avatar_form = forms.UserAvatarForm(
+            request.POST,
+            request.FILES,
             instance=request.user.userprofile
         )
         if user_update_form.is_valid() and user_profile_update_form.is_valid():
             user_update_form.save()
             user_profile_update_form.save()
+            user_avatar_form.save()
             messages.success(request, "Your profile has been updated!")
             return HttpResponseRedirect(reverse('accounts:profile'))
     else:
-        user_update_form = forms.UserUpdateForm(instance=request.user)
+        user_update_form = forms.UserUpdateForm(
+            instance=request.user
+        )
         user_profile_update_form = forms.UserProfileUpdateForm(
+            instance=request.user.userprofile
+        )
+        user_avatar_form = forms.UserAvatarForm(
             instance=request.user.userprofile
         )
     return render(request,
@@ -115,6 +128,7 @@ def edit_profile(request):
                   {
         'user_update_form': user_update_form,
         'user_profile_update_form': user_profile_update_form,
+        'user_avatar_form': user_avatar_form,
         'edit_profile_page': 'active'
     })
 

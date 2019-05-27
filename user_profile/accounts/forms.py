@@ -75,3 +75,11 @@ class UserProfileUpdateForm(forms.ModelForm):
             'location',
             'ice_cream_flavor',
         )
+
+
+class UserAvatarForm(forms.ModelForm):
+    class Meta:
+        model = models.UserProfile
+        fields = (
+            'avatar',
+        )
