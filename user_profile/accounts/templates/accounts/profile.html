@@ -3,9 +3,13 @@
 {% block title %}{{ user.first_name }} {{ user.last_name }}'s Profile{% endblock %}
 
 {% block content %}
-<div class="jumbotron bg-primary text-white text-center">
-  <img class="img-thumbnail" src="{{ user.userprofile.avatar.url }}">
-  <h1 class="display-4 mt-3 mb-n3">{{ user.first_name }} {{ user.last_name }}</h1>
+<div class="jumbotron jumbotron-fluid bg-primary text-white text-center shadow">
+  <div class="container">
+    <div class="">
+      <img class="col-3" src="{{ user.userprofile.avatar.url }}">
+      <h1 class="display-4 mt-3 mb-n3">{{ user.first_name }} {{ user.last_name }}</h1>
+    </div>
+  </div>
 </div>
   {% if user.email %}
   <h3>Email</h3>
@@ -30,6 +34,6 @@
 
 <hr>
 
-<p><a href="{% url 'accounts:edit' %}">Edit your profile</a></p>
-<p><a href="{% url 'accounts:change_password' %}">Change password</a></p>
+<p><a href="{% url 'accounts:edit' %}" class="text-decoration-none">Edit your profile</a></p>
+<p><a href="{% url 'accounts:change_password' %}" class="text-decoration-none">Change password</a></p>
 {% endblock %}
