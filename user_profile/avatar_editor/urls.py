@@ -21,5 +21,5 @@ from . import views
 
 app_name = 'avatar_editor'
 urlpatterns = [
-    path('', views.edit_avatar, name='edit_avatar'),
+    path('<pk>', views.edit_avatar, name='edit_avatar'),
 ]
