@@ -1,4 +1,4 @@
-{% load static from staticfiles %}
+{% load static %}
 
 <!DOCTYPE html>
 
@@ -7,50 +7,9 @@
     <meta charset="utf-8">
     <title>{% block title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
-    <script src="{% static "js/jquery-3.3.1.min.js" %}" type="text/javascript" charset="utf-8"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static "css/global.css" %}">
     {% block head %}{% endblock %}
   </head>
-  <header>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-      <ul class="navbar-nav ml-5">
-        <li class="nav-item mx-3 {{ index_page }}"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
-        {% if not user.is_authenticated %}
-          <li class="nav-item mx-3 {{ registration_page }}"><a class="nav-link" href="{% url 'accounts:register' %}">Register</a></li>
-          <li class="nav-item mx-3 {{ login_page }}"><a class="nav-link" href="{% url 'accounts:login' %}">Login</a></li>
-        {% else %}
-          <li class="nav-item"><a class="nav-link ml-1" href="{% url 'accounts:logout' %}">Logout</a></li>
-        {% endif %}
-        <li class="nav-item mx-3 {{ profile_page }}"><a class="nav-link" href="{% url 'accounts:profile' %}">Profile</a></li>
-      </ul>
-    </nav>
-  </header>
   <body>
-
-
-    <!-- Messages -->
-    <div class="" id="flash_messages">
-      {% if messages %}
-          <div class="">
-              <div class="">
-                  {% for message in messages %}
-                      <div class="alert alert-{{ message.tags }}">
-                          {{ message }}
-                      </div>
-                  {% endfor %}
-              </div>
-          </div>
-      {% endif %}
-    </div>
-
-    <!-- Page Content -->
-    <div class="container">{% block content %}{% endblock %}</div>
-  	<script src="{% static "js/user_profile.js" %}" type="text/javascript" charset="utf-8"></script>
-    {% block js %}{% endblock %}
+    {% block content %}{% endblock %}
   </body>
 </html>
