@@ -6,11 +6,10 @@
 {% block content %}
   <div class="jumbotron jumbotron-fluid bg-primary shadow" style="margin-bottom: 0px">
     {% if user.is_authenticated %}
+      <h1 class="text-center text-white">Hello {{ user.username }}!</h1>
       {% if not user.first_name %}
-        <h1 class="text-center text-white">Hello {{ user.username }}!</h1>
         <p class="text-center text-white">Add some information to your <a class="text-white-50" href="{% url 'accounts:edit' %}">profile</a>!</p>
       {% else %}
-        <h1 class="text-center text-white">Hello {{ user.first_name }}!</h1>
         <img class="col-3 mx-auto d-block" src="{{ user.userprofile.avatar.url }}">
         <p class="text-center text-white">Check out your <a class="text-white-50" href="{% url 'accounts:profile' %}">profile</a>!</p>
       {% endif %}

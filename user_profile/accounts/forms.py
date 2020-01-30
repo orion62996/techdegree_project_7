@@ -83,11 +83,3 @@ class UserAvatarForm(forms.ModelForm):
         fields = (
             'avatar',
         )
-
-
-class EditAvatarForm(forms.Form):
-    x = forms.FloatField()
-    y = forms.FloatField()
-    width = forms.FloatField()
-    height = forms.FloatField()
-    flip = forms.BooleanField(required=False)

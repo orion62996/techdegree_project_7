@@ -8,8 +8,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from PIL import Image
-
 from . import forms
 from . import models
 
@@ -131,7 +129,7 @@ def edit_profile(request):
         'user_update_form': user_update_form,
         'user_profile_update_form': user_profile_update_form,
         'user_avatar_form': user_avatar_form,
-        'profile_page': 'active'
+        'edit_profile_page': 'active'
     })
 
 
@@ -152,28 +150,3 @@ def change_password(request):
     else:
         form = forms.PasswordChangeForm(request.user)
     return render(request, 'accounts/change_password.html', {'form': form})
-
-
-@login_required
-def edit_avatar(request):
-    user = request.user
-    user_profile = get_object_or_404(models.UserProfile, user_id=user.id)
-    avatar = user_profile.avatar
-    if request.method == 'POST':
-        form = forms.EditAvatarForm(request.POST, request.FILES)
-        if form.is_valid():
-            x = form.cleaned_data.get('x')
-            y = form.cleaned_data.get('y')
-            w = form.cleaned_data.get('width')
-            h = form.cleaned_data.get('height')
-            flip = form.cleaned_data.get('flip')
-
-            image = Image.open(avatar)
-            image = image.crop((x, y, w+x, h+y))
-            if flip:
-                image = image.transpose(Image.FLIP_LEFT_RIGHT)
-            image.save(avatar.path)
-            return HttpResponseRedirect(reverse('accounts:profile'))
-    else:
-        form = forms.EditAvatarForm()
-    return render(request, 'accounts/edit_avatar.html', {'form': form, 'avatar': avatar})
