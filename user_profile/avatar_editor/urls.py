@@ -15,15 +15,11 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.urls import include, path
+from django.urls import path
 
 from . import views
 
+app_name = 'avatar_editor'
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('avatar_editor', include('avatar_editor.urls',
-        namespace='avatar_editor')),
-    path('', views.index, name='index'),
+    path('', views.edit_avatar, name='edit_avatar'),
 ]
-urlpatterns += staticfiles_urlpatterns()

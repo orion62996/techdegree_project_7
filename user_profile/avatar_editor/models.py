@@ -1,3 +1,6 @@
 from django.db import models
 
-# Create your models here.
+
+class Avatar(models.Model):
+    file = models.ImageField()
+    uploaded_at = models.DateTimeField(auto_now_add=True)
