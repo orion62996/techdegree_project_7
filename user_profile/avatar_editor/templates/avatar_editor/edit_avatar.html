@@ -5,5 +5,11 @@
 {% block content %}
   <h1>Edit Avatar</h1>
   <h2>Avatar</h2>
+  <form action="" method="POST">
+    {{ form.as_p }}
+    {% csrf_token %}
+    <input type="submit" value="Save">
+  </form>
+
   <img src="{{ avatar.file.url }}">
 {% endblock %}
