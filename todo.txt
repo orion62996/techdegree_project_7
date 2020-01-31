@@ -7,4 +7,4 @@ make view to save photo edits
 
 Create accounts app
 
-build form, view, url, and template for login, register, change password
+build form, view, url, and template for login, change password
