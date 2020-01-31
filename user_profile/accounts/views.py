@@ -37,7 +37,7 @@ def sign_in(request):
     return render(
         request,
         'accounts/login.html',
-        {'form': form}
+        {'form': form, 'login_page': 'active'}
     )
 
 
@@ -63,7 +63,7 @@ def register(request):
     return render(
         request,
         'accounts/register.html',
-        {'form': form}
+        {'form': form, 'registration_page': 'active'}
     )
 
 
