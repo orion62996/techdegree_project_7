@@ -1,12 +1,14 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
 from . import forms
 from . import models
+from avatar_editor import models as ae_models
 
 
 def sign_in(request):
@@ -23,7 +25,7 @@ def sign_in(request):
                         request,
                         f"You are now logged in as {user.username}"
                     )
-                    return HttpResponseRedirect(reverse('index'))
+                    return HttpResponseRedirect(reverse('accounts:profile'))
                 else:
                     messages.error(
                         request,
@@ -71,3 +73,59 @@ def sign_out(request):
     logout(request)
     messages.success(request, "You've been logged out. Come back soon!")
     return HttpResponseRedirect(reverse('index'))
+
+
+@login_required
+def profile(request):
+    """Display the details of the user's profile"""
+    user = request.user
+    user_profile = get_object_or_404(models.UserProfile, user_id=user.id)
+    avatar = ae_models.Avatar.objects.get(pk=user_profile.avatar_id)
+    return render(
+        request,
+        'accounts/profile.html',
+        {'user': user, 'user_profile': user_profile, 'avatar': avatar, 'profile_page': 'active'}
+    )
+
+
+@login_required
+def edit_profile(request):
+    """Edit the details of the user's profile"""
+    if request.method == 'POST':
+        user_update_form = forms.UserUpdateForm(
+            request.POST,
+            instance=request.user
+        )
+        user_profile_update_form = forms.UserProfileUpdateForm(
+            request.POST,
+            instance=request.user.userprofile
+        )
+        user_avatar_form = forms.UserAvatarForm(
+            request.POST,
+            request.FILES,
+            instance=request.user.userprofile
+        )
+        if user_update_form.is_valid() and user_profile_update_form.is_valid():
+            user_update_form.save()
+            user_profile_update_form.save()
+            user_avatar_form.save()
+            messages.success(request, "Your profile has been updated!")
+            return HttpResponseRedirect(reverse('accounts:profile'))
+    else:
+        user_update_form = forms.UserUpdateForm(
+            instance=request.user
+        )
+        user_profile_update_form = forms.UserProfileUpdateForm(
+            instance=request.user.userprofile
+        )
+        user_avatar_form = forms.UserAvatarForm(
+            instance=request.user.userprofile
+        )
+    return render(request,
+                  'accounts/edit_profile.html',
+                  {
+        'user_update_form': user_update_form,
+        'user_profile_update_form': user_profile_update_form,
+        'user_avatar_form': user_avatar_form,
+        'edit_profile_page': 'active'
+    })

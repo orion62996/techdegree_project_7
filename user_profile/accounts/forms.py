@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.utils.translation import gettext, gettext_lazy as _
 
+from bootstrap_datepicker_plus import DatePickerInput
+
 from . import models
 
 
@@ -33,3 +35,40 @@ class UserRegisterForm(UserCreationForm):
             'password1',
             'password2',
         ]
+
+
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField()
+
+    class Meta:
+        model = User
+        fields = (
+            'email',
+            'first_name',
+            'last_name',
+        )
+
+
+class UserProfileUpdateForm(forms.ModelForm):
+    dob = forms.DateField(
+        widget = DatePickerInput(format='%m/%d/%Y'),
+        label = _("Date of Birth"),
+        required = False,
+    )
+
+    class Meta:
+        model = models.UserProfile
+        fields = (
+            'dob',
+            'bio',
+            'location',
+            'hobby',
+        )
+
+
+class UserAvatarForm(forms.ModelForm):
+    class Meta:
+        model = models.UserProfile
+        fields = (
+            'avatar',
+        )

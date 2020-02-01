@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'accounts.apps.AccountsConfig',
     'avatar_editor.apps.AvatarEditorConfig',
+    'bootstrap_datepicker_plus',
     'crispy_forms',
 ]
 

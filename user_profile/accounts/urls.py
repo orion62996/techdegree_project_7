@@ -22,8 +22,10 @@ from . import views
 
 app_name = 'accounts'
 urlpatterns = [
+    path('edit', views.edit_profile, name='edit'),
     path('login', views.sign_in, name='login'),
     path('logout', views.sign_out, name='logout'),
+    path('profile', views.profile, name='profile'),
     path('register', views.register, name='register'),
 ]
 urlpatterns += staticfiles_urlpatterns()

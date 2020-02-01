@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+  {% if user.first_name %}
+    {{ user.first_name }}{% if user.last_name %} {{ user.last_name }}{% endif %}'s Profile
+    {% else %}
+    {{ user.username }} | Profile
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid text-center">
+  <div class="container">
+    <div class="">
+      <img class="col-3" src="{{ avatar.file.url }}">
+      <h1 class="display-4 mt-3 mb-n3">{{ user.first_name }} {{ user.last_name }}</h1>
+    </div>
+  </div>
+</div>
+  {% if user.email %}
+  <h3>Email</h3>
+  <p>{{ user.email }}</p>
+  {% endif %}
+  {% if user_profile.bio %}
+  <h3>Bio</h3>
+  <p>{{ user_profile.bio|safe }}</p>
+  {% endif %}
+  {% if user_profile.dob %}
+  <h3>DOB</h3>
+  <p>{{ user_profile.dob }}</p>
+  {% endif %}
+  {% if user_profile.location %}
+  <h3>Location</h3>
+  <p>{{ user_profile.location }}</p>
+  {% endif %}
+  {% if user_profile.hobby %}
+  <h3>Favorite Hobby</h3>
+  <p>{{ user_profile.hobby }}</p>
+  {% endif %}
+
+  <hr>
+
+  <p><a href="{% url 'accounts:edit' %}" class="text-dark text-decoration-none"><i data-feather="edit" class="align-top"></i> Edit your profile</a></p>
+{% endblock %}
