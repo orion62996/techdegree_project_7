@@ -2,8 +2,15 @@
 
 {% block title %}Home{% endblock %}
 
+
 {% block content %}
-  <div class="jumbotron">
-    <h1 class="display-4 text-black">Welcome</h1>
+  <div class="jumbotron jumbotron-fluid" style="margin-bottom: 0px">
+    {% if user.is_authenticated %}
+      <h1 class="text-center">Hello {{ user.username }}!</h1>
+        <img class="col-3 mx-auto d-block" src="{{ user.userprofile.avatar.url }}">
+    {% else %}
+      <h1 class="display-4 text-center">Sign up and create a profile!</h1>
+      <p class="lead text-center"><a class="text-black-50" href="{% url 'accounts:register' %}">Register</a> a new account, or <a class="text-black-50" href="{% url 'accounts:login' %}">login</a> if you already have one.</p>
+    {% endif %}
   </div>
 {% endblock %}

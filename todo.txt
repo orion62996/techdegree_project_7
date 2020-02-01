@@ -1,3 +1,5 @@
+Add messages
+
 Build avatar_editor app
 build form to accept editing info
 make view to save photo edits
@@ -7,4 +9,4 @@ make view to save photo edits
 
 Create accounts app
 
-build form, view, url, and template for login, change password
+build form, view, url, and template for profile page, change password
