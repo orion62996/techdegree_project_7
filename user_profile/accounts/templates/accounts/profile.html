@@ -9,11 +9,10 @@
 {% endblock %}
 
 {% block content %}
-  <div class="bg-secondary pb-1">
-    <img class="col-3 mt-4 ml-4" src="{{ user.userprofile.avatar.url }}"><h1 class="display-4 mt-3 mb-n2 list-inline-item align-middle text-white">{{ user.first_name }} {{ user.last_name }}</h1>
-    <p class="ml-4 pl-3"><a href="#" class="text-white text-decoration-none">Edit your avatar</a></p>
+  <div class="jumbotron">
+    <img class="col-3" src="{{ user.userprofile.avatar.url }}"><h1 class="display-4 ml-4 list-inline-item align-bottom">{{ user.first_name }} {{ user.last_name }}</h1>
   </div>
-  <div class="container ml-4 mt-2">
+  <div class="container mt-2">
     {% if user.email %}
     <h3>Email</h3>
     <p>{{ user.email }}</p>
@@ -36,7 +35,7 @@
     {% endif %}
   </div>
     <hr>
-  <div class="container ml-4">
-    <p><a href="{% url 'accounts:edit' %}" class="text-dark text-decoration-none"><i data-feather="edit" class="align-top"></i> Edit your profile</a></p>
+  <div class="container">
+    <p><a href="{% url 'accounts:edit' %}" class="text-dark text-decoration-none"><i data-feather="edit" class="align-top"></i> Edit your profile</a> | <a href="{% url 'accounts:change_password' %}" class="text-dark text-decoration-none"><i data-feather="unlock" class="align-top"></i> Change your password</a></p>
   </div>
 {% endblock %}

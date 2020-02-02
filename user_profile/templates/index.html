@@ -8,14 +8,14 @@
     {% if user.is_authenticated %}
       <h1 class="display-4 mb-4 text-center">Hello, {{ user.username }}!</h1>
       {% if not user.first_name %}
-        <p class="lead text-center">Add some information to your <a class="text-black-50 text-decoration-none" href="{% url 'accounts:edit' %}">profile</a></p>
+        <p class="lead text-center"><a class="text-black-50 text-decoration-none" href="{% url 'accounts:edit' %}">Add some information</a> to your <a class="text-black-50 text-decoration-none" href="{% url 'accounts:profile' %}">profile</p>
       {% else %}
-        <img class="col-3 mx-auto my-2 d-block" src="{{ user.userprofile.avatar.url }}">
-        <p class="lead text-center">Check out your <a class="text-black-50" href="{% url 'accounts:profile' %}">profile</a>!</p>
+        <img class="col-3 mx-auto d-block" src="{{ user.userprofile.avatar.url }}">
+        <p class="lead mt-2 text-center">Check out your <a class="text-black-50 text-decoration-none" href="{% url 'accounts:profile' %}">profile</a>!</p>
       {% endif %}
     {% else %}
       <h1 class="display-4 text-center">Sign up and create a profile!</h1>
-      <p class="lead text-center"><a class="text-black-50 text-decoration-none" href="{% url 'accounts:register' %}">Register</a> a new account, or <a class="text-black-50 text-decoration-none" href="{% url 'accounts:login' %}">login</a> if you already have one</p>
+      <p class="lead mt-2 text-center"><a class="text-black-50 text-decoration-none" href="{% url 'accounts:register' %}">Register</a> a new account, or <a class="text-black-50 text-decoration-none" href="{% url 'accounts:login' %}">login</a> if you already have one</p>
     {% endif %}
   </div>
 {% endblock %}
