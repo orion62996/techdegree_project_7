@@ -8,7 +8,6 @@ from django.urls import reverse
 
 from . import forms
 from . import models
-from avatar_editor import models as ae_models
 
 
 def sign_in(request):
@@ -80,11 +79,10 @@ def profile(request):
     """Display the details of the user's profile"""
     user = request.user
     user_profile = get_object_or_404(models.UserProfile, user_id=user.id)
-    avatar = ae_models.Avatar.objects.get(pk=user_profile.avatar_id)
     return render(
         request,
         'accounts/profile.html',
-        {'user': user, 'user_profile': user_profile, 'avatar': avatar, 'profile_page': 'active'}
+        {'user': user, 'user_profile': user_profile, 'profile_page': 'active'}
     )
 
 

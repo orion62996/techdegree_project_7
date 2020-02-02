@@ -11,7 +11,7 @@
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
       <img class="col-3" src="{{ user.userprofile.avatar.url }}">
-      {{ user_avatar_form|crispy }}
+      {{ user_avatar_form.as_p }}
       {{ user_update_form|crispy }}
       {{ user_profile_update_form|crispy }}
       {{ user_profile_update_form.media }}

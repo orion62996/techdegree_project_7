@@ -23,8 +23,6 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('avatar_editor/', include('avatar_editor.urls',
-        namespace='avatar_editor')),
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('', views.index, name='index'),
 ]
