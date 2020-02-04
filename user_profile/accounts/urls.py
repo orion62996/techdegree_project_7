@@ -24,6 +24,7 @@ app_name = 'accounts'
 urlpatterns = [
     path('change-password/', views.change_password, name='change_password'),
     path('edit', views.edit_profile, name='edit'),
+    path('edit-avatar', views.edit_avatar, name='edit_avatar'),
     path('login', views.sign_in, name='login'),
     path('logout', views.sign_out, name='logout'),
     path('profile', views.profile, name='profile'),

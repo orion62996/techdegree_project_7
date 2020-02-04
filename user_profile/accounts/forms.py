@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext, gettext_lazy as _
 
 from bootstrap_datepicker_plus import DatePickerInput
+from image_cropping import ImageCropWidget
 
 from . import models
 

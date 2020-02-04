@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+
+{% load cropping %}
+
+{% block title %}Edit Your Avatar{% endblock %}
+
+{% block head %}{{ form.media }}{% endblock %}
+
+{% block content %}
+  <img src="{{ thumbnail_url }}">
+  {{ form }}
+{% endblock %}

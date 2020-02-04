@@ -1,12 +1,3 @@
-Add messages
+Create delete view, url, and link in edit_profile
 
-Build avatar_editor app
-build form to accept editing info
-make view to save photo edits
-
-
-
-
-Create accounts app
-
-build form, view, url, and template for profile page, change password
+Create avatar_edit form, view, html, url, and link
