@@ -7,8 +7,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from image_cropping.utils import get_backend
-
 from . import forms
 from . import models
 
@@ -82,19 +80,10 @@ def profile(request):
     """Display the details of the user's profile"""
     user = request.user
     user_profile = get_object_or_404(models.UserProfile, user_id=user.id)
-    thumbnail_url = get_backend().get_thumbnail_url(
-        user_profile.avatar,
-        {
-            'size': (300, 300),
-            'box': user_profile.cropping,
-            'crop': True,
-            'detail': True,
-        }
-    )
     return render(
         request,
         'accounts/profile.html',
-        {'user': user, 'user_profile': user_profile, 'thumbnail_url': thumbnail_url, 'profile_page': 'active'}
+        {'user': user, 'user_profile': user_profile, 'profile_page': 'active'}
     )
 
 
@@ -158,38 +147,3 @@ def change_password(request):
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'accounts/change_password.html', {'form': form})
-
-
-@login_required
-def edit_avatar(request):
-    user = request.user
-    user_profile = get_object_or_404(models.UserProfile, user_id=user.id)
-    thumbnail_url = get_backend().get_thumbnail_url(
-        user_profile.avatar,
-        {
-            'size': (300, 300),
-            'box': user_profile.cropping,
-            'crop': True,
-            'detail': True,
-        }
-    )
-    if request.method == 'POST':
-        form = forms.EditAvatarForm(
-            request.POST,
-            instance=request.user
-        )
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Your avatar has been updated!")
-            return HttpResponseRedirect(reverse('accounts:profile'))
-    else:
-        form = forms.EditAvatarForm(
-            instance=request.user
-        )
-    return render(request,
-                  'accounts/edit_avatar.html',
-                  {
-        'form': form,
-        'thumbnail_url': thumbnail_url,
-        'edit_profile_page': 'active'
-    })

@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'bootstrap_datepicker_plus',
     'crispy_forms',
-    'easy_thumbnails',
-    'image_cropping',
 ]
 
 MIDDLEWARE = [
@@ -131,8 +129,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-from easy_thumbnails.conf import Settings as thumbnail_settings
-THUMBNAIL_PROCESSORS = (
-    'image_cropping.thumbnail_processors.crop_corners',
-) + thumbnail_settings.THUMBNAIL_PROCESSORS
