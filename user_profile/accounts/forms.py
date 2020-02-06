@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext, gettext_lazy as _
 
 from bootstrap_datepicker_plus import DatePickerInput
+from django_summernote.widgets import SummernoteInplaceWidget
 
 from . import models
 
@@ -54,6 +55,9 @@ class UserProfileUpdateForm(forms.ModelForm):
         widget = DatePickerInput(format='%m/%d/%Y'),
         label = _("Date of Birth"),
         required = False,
+    )
+    bio = forms.CharField(
+        widget = SummernoteInplaceWidget,
     )
 
     class Meta:

@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block title %}Test{% endblock %}
+
+{% block content %}
+  <form method="POST" action="{% url 'accounts:test_form' %}">
+    {% csrf_token %}
+    First name:<br>
+    <input type="text" name="firstname"><br>
+    Last name:<br>
+    <input type="text" name="lastname">
+    <input type="submit" value="Submit">
+  </form>
+{% endblock %}
