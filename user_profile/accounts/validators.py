@@ -4,7 +4,9 @@ from django.utils.translation import ugettext as _
 
 
 class DifferentPasswordValidator(object):
+    """Verify that the new password is different from the old password"""
     def validate(self, password, user=None):
+        """Verify that the new password is different from the old password"""
         if check_password(password, user.password):
             raise ValidationError(
                 _("You must enter a password that is different from your current password."),
@@ -18,7 +20,15 @@ class DifferentPasswordValidator(object):
 
 
 class UppercaseLowercaseValidator(object):
+    """
+    Verify that the password contains both
+    lowercase and uppercase characters
+    """
     def validate(self, password, user=None):
+        """
+        Verify that the password contains both
+        lower and uppercase characters
+        """
         has_upper = False
         has_lower = False
         for character in password:
@@ -39,7 +49,9 @@ class UppercaseLowercaseValidator(object):
 
 
 class ContainsNumericDigit(object):
+    """Verify that the password contains a numeric digit"""
     def validate(self, password, user=None):
+        """Verify that the password contains a numeric digit"""
         has_digit = False
         for character in password:
             if character in "1234567890":
@@ -57,7 +69,9 @@ class ContainsNumericDigit(object):
 
 
 class ContainsSpecialCharacter(object):
+    """Verify that the password contains a special character."""
     def validate(self, password, user=None):
+        """Verify that the password contains a special character."""
         has_special_character = False
         for character in password:
             if character in "!\"#$%&*'()+,./-":

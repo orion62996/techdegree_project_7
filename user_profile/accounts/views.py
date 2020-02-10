@@ -70,6 +70,7 @@ def register(request):
 
 
 def sign_out(request):
+    """Log the user out of the site"""
     logout(request)
     messages.success(request, "You've been logged out. Come back soon!")
     return HttpResponseRedirect(reverse('index'))
@@ -132,6 +133,7 @@ def edit_profile(request):
 
 @login_required
 def change_password(request):
+    """Allow the user to change their password"""
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
         if form.is_valid():
@@ -147,17 +149,3 @@ def change_password(request):
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'accounts/change_password.html', {'form': form})
-
-
-def test_form(request):
-    if request.method == 'POST':
-        messages.success(
-            request,
-            "Your form was received {}".format(request.POST['firstname'])
-        )
-        return HttpResponseRedirect(reverse('accounts:test_form'))
-    return render(request, 'accounts/test_form.html')
-
-
-def edit_avatar(request):
-    return render(request, 'accounts/edit_avatar.html')
