@@ -149,3 +149,14 @@ def change_password(request):
     else:
         form = PasswordChangeForm(request.user)
     return render(request, 'accounts/change_password.html', {'form': form})
+
+
+@login_required
+def edit_avatar(request):
+    user = request.user
+    user_profile = get_object_or_404(models.UserProfile, user_id=user.id)
+    return render(
+        request,
+        'accounts/edit_avatar.html',
+        {'user': user, 'user_profile': user_profile}
+    )

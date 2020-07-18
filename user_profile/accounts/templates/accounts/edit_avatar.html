@@ -4,12 +4,18 @@
 
 {% block title %}Edit Your Avatar{% endblock %}
 
-{% block head %}<link  href="{% static 'js/cropperjs/src/css/cropper.css' %}" rel="stylesheet">{% endblock %}
+{% block head %}
+  <!-- <link rel="stylesheet" href="{% static "js/cropperjs/src/css/cropper.css" %}" charset="utf-8"></link> -->
+{% endblock %}
 
 {% block content %}
   <h1>Hello</h1>
+  <div>
+    <img id="image" src="{{ user.userprofile.avatar.url }}">
+  </div>
 {% endblock %}
 
 {% block js %}
-  <script src="{% static 'js/cropperjs/src/js/cropper.js' %}" type="module"></script>
+  <!-- <script src="{% static "js/cropperjs/src/js/cropper.js" %}" type="module"></script> -->
+  <script src="{% static "js/edit_avatar.js" %}" type="module"></script>
 {% endblock %}
