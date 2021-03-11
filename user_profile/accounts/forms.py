@@ -1,16 +1,23 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.core.files import File
 from django.utils.translation import gettext, gettext_lazy as _
 
 from bootstrap_datepicker_plus import DatePickerInput
 from django_summernote.widgets import SummernoteInplaceWidget
+from PIL import Image
 
 from . import models
 
 
+def must_match_field(value):
+    pass
+
+
 class UserRegisterForm(UserCreationForm):
     email = forms.EmailField()
+    verify_email = forms.EmailField(label="Please verify your email address")
     password1 = forms.CharField(
         label=_("Password"),
         strip=False,
@@ -33,10 +40,20 @@ class UserRegisterForm(UserCreationForm):
         fields = [
             'username',
             'email',
+            'verify_email',
             'password1',
             'password2',
         ]
 
+    def clean(self):
+        cleaned_data = super().clean()
+        email = cleaned_data.get('email')
+        verify = cleaned_data.get('verify_email')
+
+        if email != verify:
+            raise forms.ValidationError(
+                "You need to enter the same email address in both fields"
+            )
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()

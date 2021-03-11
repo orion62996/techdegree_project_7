@@ -25,7 +25,7 @@ def sign_in(request):
                         request,
                         f"You are now logged in as {user.username}"
                     )
-                    return HttpResponseRedirect(reverse('accounts:profile'))
+                    return HttpResponseRedirect(reverse('index'))
                 else:
                     messages.error(
                         request,
@@ -153,6 +153,7 @@ def change_password(request):
 
 @login_required
 def edit_avatar(request):
+    """Testing cropperjs"""
     user = request.user
     user_profile = get_object_or_404(models.UserProfile, user_id=user.id)
     return render(

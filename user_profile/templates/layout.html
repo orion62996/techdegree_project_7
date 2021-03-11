@@ -6,6 +6,7 @@
   <head>
     <meta charset="utf-8">
     <title>{% block title %}{% endblock %}</title>
+    <link rel="shortcut icon" type="image/jpg" href="{% static "images/favicon.ico" %}"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,500' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Cousine' rel='stylesheet' type='text/css'>
@@ -24,24 +25,26 @@
   <header>
     <!-- Navbar -->
     <nav class="navbar navbar-dark bg-dark navbar-default px-5">
-      <ul class="navbar-nav navbar-left mx-5 px-5">
-        <li class="nav-item{{ index_page }} "><a class="nav-link" href="{% url 'index' %}"><i data-feather="home" class="align-top"></i> Home</a></li>
+      <ul class="navbar-nav mx-5 px-5 flex-row">
+        <li class="nav-item {{ index_page }} "><a class="nav-link" href="{% url 'index' %}"><i data-feather="home" class="align-top"></i> Home</a></li>
+        {% if user.is_authenticated %}
+          <li class="nav-item {{ profile_page }} "><a class="nav-link ml-3" href="{% url 'accounts:profile' %}"><i data-feather="user" class="align-top"></i> Profile</a></li>
+        {% endif %}
       </ul>
-      <ul class="navbar-nav navbar-left mx-5 px-5">
+      <ul class="navbar-nav mx-5 px-5 flex-row">
         {% if not user.is_authenticated %}
-          <li class="nav-item {{ registration_page }}"><a class="nav-link" href="{% url 'accounts:register' %}">Register</a></li>
-          <li class="nav-item {{ login_page }}"><a class="nav-link" href="{% url 'accounts:login' %}">Login <i data-feather="log-in"></i></a></li>
+          <li class="nav-item mr-4 {{ registration_page }}"><a class="nav-link" href="{% url 'accounts:register' %}">Register</a></li>
+          <li class="nav-item {{ login_page }}"><a class="nav-link" href="{% url 'accounts:login' %}">Login<i data-feather="log-in"></i></a></li>
         {% else %}
-          <li class="nav-item"><a class="nav-link ml-1" href="{% url 'accounts:logout' %}"><i data-feather="log-out"></i> Logout</a></li>
+          <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}"><i data-feather="log-out"></i>Logout</a></li>
         {% endif %}
       </ul>
     </nav>
   </header>
   <body>
 
-
     <!-- Messages -->
-    <div class="" id="flash_messages">
+    <div class="container-fluid position-fixed" id="flash_messages">
       {% if messages %}
           <div class="">
               <div class="">

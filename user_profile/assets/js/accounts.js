@@ -2,7 +2,7 @@
 
 // Select all password fields
 const passwordFields = document.querySelectorAll('div input[type="password"]')
-// Select the second from last password field to attach the meter element
+// Select the second from last (first) password field to attach the meter element
 const passwordField = passwordFields[passwordFields.length - 2];
 // Select the next element to place the meter
 const passwordHelpText = passwordField.nextSibling;
@@ -12,6 +12,8 @@ const passwordMeter = document.createElement('meter');
 const passwordFieldBreak = document.createElement('br');
 // Select password requirement list to allow styling
 const lis = document.querySelector('small ul').children;
+// Select the save button
+const saveBtn = document.getElementById('saveBtn')
 // Set meter attributes
 passwordMeter.setAttribute('max', '5');
 passwordMeter.setAttribute('value', '0');
@@ -39,9 +41,9 @@ function hasSpecialCharacter(str) {
 // Generate password requirment score for the meter
 function passwordProgress(input){
   let counter = 0;
-  // Greyout password requirments that haven't been met
+  // Red-out password requirments that haven't been met
   for (let i = lis.length - 5; i < lis.length; i += 1) {
-    lis[i].style.color = 'firebrick';
+    lis[i].style.color = '#dc3545';
   }
   // Check that the password isn't entirely numeric
   if (hasLowerCase(input) || hasUpperCase(input) || hasSpecialCharacter(input)) {
@@ -68,6 +70,12 @@ function passwordProgress(input){
   if (hasSpecialCharacter(input)) {
     counter += 1;
     lis[lis.length - 1].removeAttribute('style');
+  }
+  // Disable save button if requirements aren't met
+  if (counter < 5) {
+    saveBtn.disabled = true;
+  } else {
+    saveBtn.disabled = false;
   }
   return counter.toString()
 }

@@ -33,10 +33,3 @@ meter[value="2"]::-moz-meter-bar { background: #808080; }
 meter[value="3"]::-moz-meter-bar { background: #808080; }
 meter[value="4"]::-moz-meter-bar { background: #808080; }
 meter[value="5"]::-moz-meter-bar { background: #009933; }
-
-
-/* CSS for the photo cropper */
-/* img {
-  display: block;
-  max-width: 100%;
-} */

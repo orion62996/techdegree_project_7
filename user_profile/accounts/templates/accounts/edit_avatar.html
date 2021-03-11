@@ -1,21 +1,23 @@
 {% extends 'layout.html' %}
 
 {% load static %}
+{% load crispy_forms_tags %}
 
-{% block title %}Edit Your Avatar{% endblock %}
+{% block title %}Edit Profile{% endblock %}
 
 {% block head %}
-  <!-- <link rel="stylesheet" href="{% static "js/cropperjs/src/css/cropper.css" %}" charset="utf-8"></link> -->
+  <link rel="stylesheet" href="{% static "css/cropper.min.css" %}">
+  <link rel="stylesheet" href="{% static "css/cropper-style.css" %}">
 {% endblock %}
 
 {% block content %}
-  <h1>Hello</h1>
-  <div>
-    <img id="image" src="{{ user.userprofile.avatar.url }}">
+  <div class="container my-4">
+    <h1>Edit Profile</h1>
+    <img class="pl-0 my-3" src="{{ user.userprofile.avatar.url }}" id="image">
   </div>
 {% endblock %}
 
 {% block js %}
-  <!-- <script src="{% static "js/cropperjs/src/js/cropper.js" %}" type="module"></script> -->
-  <script src="{% static "js/edit_avatar.js" %}" type="module"></script>
+  <script src="{% static "js/cropper.js" %}" type="text/javascript" charset="utf-8"></script>
+  <script src="{% static "js/crop_avatar.js" %}" type="text/javascript" charset="utf-8"></script>
 {% endblock %}

@@ -6,7 +6,11 @@
 {% block content %}
   <div class="jumbotron jumbotron-fluid" style="margin-bottom: 0px">
     {% if user.is_authenticated %}
-      <h1 class="display-4 mb-4 text-center">Hello, {{ user.username }}!</h1>
+      {% if user.first_name %}
+        <h1 class="display-4 mb-4 text-center">Hello, {{ user.first_name }}!</h1>
+      {% else %}
+        <h1 class="display-4 mb-4 text-center">Hello, {{ user.username }}!</h1>
+      {% endif %}
       {% if not user.first_name %}
         <p class="lead text-center"><a class="text-black-50 text-decoration-none" href="{% url 'accounts:edit' %}">Add some information</a> to your <a class="text-black-50 text-decoration-none" href="{% url 'accounts:profile' %}">profile</p>
       {% else %}

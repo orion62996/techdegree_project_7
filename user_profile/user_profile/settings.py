@@ -97,7 +97,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'OPTIONS': {
             'user_attributes': ('username', 'first_name', 'last_name', 'email',
                                 'dob',),
-            'max_similarity': 0.6,
+            'max_similarity': 0.4,
         }
     },
     {

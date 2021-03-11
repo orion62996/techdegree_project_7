@@ -5,17 +5,26 @@
 
 {% block title %}Edit Profile{% endblock %}
 
+{% block head %}
+  <link rel="stylesheet" href="{% static "css/cropper.min.css" %}">
+{% endblock %}
+
 {% block content %}
   <div class="container my-4">
     <h1>Edit Profile</h1>
-    <img class="col-3" src="{{ user.userprofile.avatar.url }}">
+    <img class="col-3 pl-0 my-3" src="{{ user.userprofile.avatar.url }}">
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
-      {{ user_avatar_form.as_p }}
+      {{ user_avatar_form|crispy }}
       {{ user_update_form|crispy }}
       {{ user_profile_update_form|crispy }}
       {{ user_profile_update_form.media }}
       <button class="btn btn-dark" type="submit">Save Changes</button>
     </form>
   </div>
+{% endblock %}
+
+{% block js %}
+  <script src="{% static "js/cropper.js" %}" type="text/javascript" charset="utf-8"></script>
+  <script src="{% static "js/edit_avatar.js" %}" type="text/javascript" charset="utf-8"></script>
 {% endblock %}

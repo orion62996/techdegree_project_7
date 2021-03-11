@@ -2,7 +2,7 @@
 
 {% block title %}
   {% if user.first_name %}
-    {{ user.first_name }}{% if user.last_name %} {{ user.last_name }}{% endif %}'s Profile
+    {{ user.first_name }}'s Profile
     {% else %}
     {{ user.username }} | Profile
   {% endif %}
@@ -10,7 +10,9 @@
 
 {% block content %}
   <div class="jumbotron">
-    <img class="col-3" src="{{ user.userprofile.avatar.url }}"><h1 class="display-4 ml-4 list-inline-item align-bottom">{{ user.first_name }} {{ user.last_name }}</h1>
+
+    <img class="col-3" src="{{ user.userprofile.avatar.url }}">
+    <h1 class="display-4 ml-2 list-inline-item align-bottom">{{ user.first_name }} {{ user.last_name }}</h1>
   </div>
   <div class="container mt-2">
     {% if user.email %}
