@@ -7,6 +7,8 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
+from PIL import Image
+
 from . import forms
 from . import models
 
@@ -152,12 +154,62 @@ def change_password(request):
 
 
 @login_required
-def edit_avatar(request):
+def select_avatar(request):
     """Testing cropperjs"""
     user = request.user
     user_profile = get_object_or_404(models.UserProfile, user_id=user.id)
+    if request.method == 'POST':
+        user_avatar_form = forms.UserAvatarForm(
+            request.POST,
+            request.FILES,
+            instance=request.user.userprofile
+        )
+        if user_avatar_form.is_valid():
+            user_avatar_form.save()
+            return HttpResponseRedirect(reverse('accounts:crop_avatar'))
+    else:
+        user_avatar_form = forms.UserAvatarForm(
+            instance=request.user.userprofile
+        )
     return render(
         request,
-        'accounts/edit_avatar.html',
-        {'user': user, 'user_profile': user_profile}
+        'accounts/select_avatar.html',
+        {
+        'user': user,
+        'user_profile': user_profile,
+        'user_avatar_form': user_avatar_form
+        }
+    )
+
+
+@login_required
+def crop_avatar(request):
+    user = request.user
+    user_profile = get_object_or_404(models.UserProfile, user_id=user.id)
+    if request.method == 'POST':
+        crop_avatar_form = forms.CropAvatarForm(
+        request.POST,
+        request.FILES
+        )
+        if crop_avatar_form.is_valid():
+            x = crop_avatar_form.cleaned_data['x']
+            y = crop_avatar_form.cleaned_data['y']
+            w = crop_avatar_form.cleaned_data['w']
+            h = crop_avatar_form.cleaned_data['h']
+
+            image = Image.open(user_profile.avatar)
+            cropped_image = image.crop((x, y, w+x, h+y))
+            resized_image = cropped_image.resize((400, 400), Image.ANTIALIAS)
+            resized_image.save(user_profile.avatar.path)
+            return HttpResponseRedirect(reverse('accounts:edit'))
+    else:
+        crop_avatar_form = forms.CropAvatarForm()
+    return render(
+        request,
+        'accounts/crop_avatar.html',
+        {
+        'user': user,
+        'user_profile': user_profile,
+        'crop_avatar_form': crop_avatar_form
+        }
     )

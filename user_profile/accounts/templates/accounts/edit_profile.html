@@ -7,24 +7,20 @@
 
 {% block head %}
   <link rel="stylesheet" href="{% static "css/cropper.min.css" %}">
+  <link rel="stylesheet" href="{% static "css/cropper-style.css" %}">
 {% endblock %}
 
 {% block content %}
   <div class="container my-4">
     <h1>Edit Profile</h1>
-    <img class="col-3 pl-0 my-3" src="{{ user.userprofile.avatar.url }}">
-    <form method="POST" enctype="multipart/form-data">
+    <img class="col-5 pl-0 my-3" src="{{ user.userprofile.avatar.url }}">
+    <a href="{% url 'accounts:select_avatar' %}"><p class="btn btn-dark">Change Avatar</p></a>
+    <form method="POST" enctype="multipart/form-data" id="formUpload">
       {% csrf_token %}
-      {{ user_avatar_form|crispy }}
       {{ user_update_form|crispy }}
       {{ user_profile_update_form|crispy }}
       {{ user_profile_update_form.media }}
       <button class="btn btn-dark" type="submit">Save Changes</button>
     </form>
   </div>
-{% endblock %}
-
-{% block js %}
-  <script src="{% static "js/cropper.js" %}" type="text/javascript" charset="utf-8"></script>
-  <script src="{% static "js/edit_avatar.js" %}" type="text/javascript" charset="utf-8"></script>
 {% endblock %}

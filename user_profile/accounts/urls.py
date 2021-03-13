@@ -28,6 +28,7 @@ urlpatterns = [
     path('logout', views.sign_out, name='logout'),
     path('profile', views.profile, name='profile'),
     path('register', views.register, name='register'),
-    path('edit-avatar', views.edit_avatar, name='edit_avatar'),
+    path('select-avatar', views.select_avatar, name='select_avatar'),
+    path('crop-avatar', views.crop_avatar, name="crop_avatar"),
 ]
 urlpatterns += staticfiles_urlpatterns()

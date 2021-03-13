@@ -1,13 +1,13 @@
-const image = document.getElementById('image');
+
+const image = document.getElementById("image");
 const cropper = new Cropper(image, {
-  aspectRatio: 16 / 9,
+  viewMode: 1,
+  zoomable: false,
+  aspectRatio: 1 / 1,
   crop(event) {
-    console.log(event.detail.x);
-    console.log(event.detail.y);
-    console.log(event.detail.width);
-    console.log(event.detail.height);
-    console.log(event.detail.rotate);
-    console.log(event.detail.scaleX);
-    console.log(event.detail.scaleY);
+    document.getElementById("id_x").value = event.detail.x;
+    document.getElementById("id_y").value = event.detail.y;
+    document.getElementById("id_w").value = event.detail.width;
+    document.getElementById("id_h").value = event.detail.height;
   },
 });

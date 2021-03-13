@@ -6,7 +6,6 @@ from django.utils.translation import gettext, gettext_lazy as _
 
 from bootstrap_datepicker_plus import DatePickerInput
 from django_summernote.widgets import SummernoteInplaceWidget
-from PIL import Image
 
 from . import models
 
@@ -88,8 +87,14 @@ class UserProfileUpdateForm(forms.ModelForm):
 
 
 class UserAvatarForm(forms.ModelForm):
+    avatar = forms.ImageField(widget=forms.FileInput)
     class Meta:
         model = models.UserProfile
-        fields = (
-            'avatar',
-        )
+        fields = ('avatar',)
+
+
+class CropAvatarForm(forms.Form):
+    x = forms.FloatField(widget=forms.HiddenInput())
+    y = forms.FloatField(widget=forms.HiddenInput())
+    w = forms.FloatField(widget=forms.HiddenInput())
+    h = forms.FloatField(widget=forms.HiddenInput())

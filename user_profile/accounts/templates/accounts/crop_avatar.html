@@ -11,10 +11,16 @@
 {% endblock %}
 
 {% block content %}
-  <div class="container my-4">
-    <h1>Edit Profile</h1>
-    <img class="pl-0 my-3" src="{{ user.userprofile.avatar.url }}" id="image">
-  </div>
+  <h1>Crop Your Avatar</h1>
+  <form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ crop_avatar_form }}
+    <div class="col-5 my-3 px-0">
+      <img id="image" src="{{ user.userprofile.avatar.url }}">
+    </div>
+    <button class="btn btn-dark" type="submit">Create New Avatar</button>
+  </form>
+
 {% endblock %}
 
 {% block js %}
