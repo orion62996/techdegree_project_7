@@ -96,5 +96,7 @@ class UserAvatarForm(forms.ModelForm):
 class CropAvatarForm(forms.Form):
     x = forms.FloatField(widget=forms.HiddenInput())
     y = forms.FloatField(widget=forms.HiddenInput())
-    w = forms.FloatField(widget=forms.HiddenInput())
-    h = forms.FloatField(widget=forms.HiddenInput())
+    width = forms.FloatField(widget=forms.HiddenInput())
+    height = forms.FloatField(widget=forms.HiddenInput())
+    rotate = forms.IntegerField(widget=forms.HiddenInput())
+    flip = forms.IntegerField(widget=forms.HiddenInput())

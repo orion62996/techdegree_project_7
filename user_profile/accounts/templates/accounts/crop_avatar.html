@@ -15,10 +15,16 @@
   <form method="POST" enctype="multipart/form-data">
     {% csrf_token %}
     {{ crop_avatar_form }}
-    <div class="col-5 my-3 px-0">
+
+
+    <div class="crop-box-square my-3">
       <img id="image" src="{{ user.userprofile.avatar.url }}">
     </div>
+    <button class="btn btn-dark" type="button" onclick="cropper.rotate(-90);"><i data-feather="corner-left-down"></i></button>
+    <button class="btn btn-dark" type="button" onclick="cropper.rotate(90);"><i data-feather="corner-right-down"></i></button>
+    <button class="btn btn-secondary" type="button" aria-pressed="false" id="flipToggle"><i data-feather="arrow-left"></i><i data-feather="arrow-right"></i></button>
     <button class="btn btn-dark" type="submit">Create New Avatar</button>
+
   </form>
 
 {% endblock %}

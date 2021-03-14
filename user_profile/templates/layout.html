@@ -33,7 +33,7 @@
       </ul>
       <ul class="navbar-nav mx-5 px-5 flex-row">
         {% if not user.is_authenticated %}
-          <li class="nav-item mr-4 {{ registration_page }}"><a class="nav-link" href="{% url 'accounts:register' %}">Register</a></li>
+          <li class="nav-item mr-4 {{ registration_page }}"><a class="nav-link" href="{% url 'accounts:register' %}">Register <i data-feather="user-plus"></i></a></li>
           <li class="nav-item {{ login_page }}"><a class="nav-link" href="{% url 'accounts:login' %}">Login<i data-feather="log-in"></i></a></li>
         {% else %}
           <li class="nav-item"><a class="nav-link" href="{% url 'accounts:logout' %}"><i data-feather="log-out"></i>Logout</a></li>

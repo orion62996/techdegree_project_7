@@ -194,13 +194,17 @@ def crop_avatar(request):
         if crop_avatar_form.is_valid():
             x = crop_avatar_form.cleaned_data['x']
             y = crop_avatar_form.cleaned_data['y']
-            w = crop_avatar_form.cleaned_data['w']
-            h = crop_avatar_form.cleaned_data['h']
+            w = crop_avatar_form.cleaned_data['width']
+            h = crop_avatar_form.cleaned_data['height']
+            rotate = crop_avatar_form.cleaned_data['rotate']
+            flip = crop_avatar_form.cleaned_data['flip']
 
             image = Image.open(user_profile.avatar)
-            cropped_image = image.crop((x, y, w+x, h+y))
-            resized_image = cropped_image.resize((400, 400), Image.ANTIALIAS)
-            resized_image.save(user_profile.avatar.path)
+            if flip == -1:
+                image = image.transpose(method=Image.FLIP_LEFT_RIGHT)
+            rotated_image = image.rotate(-rotate, expand=True)
+            cropped_image = rotated_image.crop((x, y, w+x, y+h))
+            cropped_image.save(user_profile.avatar.path)
             return HttpResponseRedirect(reverse('accounts:edit'))
     else:
         crop_avatar_form = forms.CropAvatarForm()

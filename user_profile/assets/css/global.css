@@ -59,3 +59,9 @@ meter[value="5"]::-moz-meter-bar { background: #009933; }
   border-top-width: 0;
   padding-left: 0;
 }
+
+.crop-box-square {
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+}

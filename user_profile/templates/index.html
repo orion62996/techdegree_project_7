@@ -15,7 +15,7 @@
         <p class="lead text-center"><a class="text-black-50 text-decoration-none" href="{% url 'accounts:edit' %}">Add some information</a> to your <a class="text-black-50 text-decoration-none" href="{% url 'accounts:profile' %}">profile</p>
       {% else %}
         <img class="col-3 mx-auto d-block" src="{{ user.userprofile.avatar.url }}">
-        <p class="lead mt-2 text-center">Check out your <a class="text-black-50 text-decoration-none" href="{% url 'accounts:profile' %}">profile</a>!</p>
+        <p class="lead mt-2 text-center">Check out your <a class="text-black-50 text-decoration-none" href="{% url 'accounts:profile' %}">profile<i data-feather="arrow-right"></i></a></p>
       {% endif %}
     {% else %}
       <h1 class="display-4 text-center">Sign up and create a profile!</h1>
