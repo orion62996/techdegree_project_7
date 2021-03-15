@@ -13,15 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.urls import path
+from django.urls import include, path
+from django.views.static import serve
 
 from . import views
 
 app_name = 'accounts'
 urlpatterns = [
+    path('summernote/', include('django_summernote.urls')),
+    path('media/<path:path>', serve, {'document_root': settings.MEDIA_ROOT}),  # Used to upload image files, other files can also be uploaded word, ppt, etc.
+    path('static/<path:path>', serve, {'document_root': settings.STATIC_ROOT}),
     path('change-password/', views.change_password, name='change_password'),
     path('edit', views.edit_profile, name='edit'),
     path('login', views.sign_in, name='login'),
