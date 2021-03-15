@@ -155,7 +155,7 @@ def change_password(request):
 
 @login_required
 def select_avatar(request):
-    """Testing cropperjs"""
+    """Allow user to select or change their avatar"""
     user = request.user
     user_profile = get_object_or_404(models.UserProfile, user_id=user.id)
     if request.method == 'POST':
@@ -184,6 +184,7 @@ def select_avatar(request):
 
 @login_required
 def crop_avatar(request):
+    """Allow user to crop their avatar"""
     user = request.user
     user_profile = get_object_or_404(models.UserProfile, user_id=user.id)
     if request.method == 'POST':

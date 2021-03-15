@@ -5,6 +5,7 @@ from django_summernote.fields import SummernoteTextField
 
 
 class UserProfile(models.Model):
+    """A user profile model that extends the built-in user model"""
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(default='images/default.jpeg', upload_to='images')
     dob = models.DateField(null=True, blank=True)

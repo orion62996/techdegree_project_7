@@ -74,7 +74,7 @@ class ContainsSpecialCharacter(object):
         """Verify that the password contains a special character."""
         has_special_character = False
         for character in password:
-            if character in "!\"#$%&*'()+,./-":
+            if character in "!\"#$%&*'()+,./-@":
                 has_special_character = True
         if not has_special_character:
             raise ValidationError(

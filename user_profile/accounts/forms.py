@@ -16,6 +16,7 @@ def must_match_field(value):
 
 
 class UserRegisterForm(UserCreationForm):
+    """Form to allow users to register"""
     email = forms.EmailField()
     verify_email = forms.EmailField(label="Please verify your email address")
     password1 = forms.CharField(
@@ -56,6 +57,7 @@ class UserRegisterForm(UserCreationForm):
             )
 
 class UserUpdateForm(forms.ModelForm):
+    """Form to allow users to update their user information"""
     email = forms.EmailField()
 
     class Meta:
@@ -68,6 +70,7 @@ class UserUpdateForm(forms.ModelForm):
 
 
 class UserProfileUpdateForm(forms.ModelForm):
+    """Form to allow users to update their profile information"""
     dob = forms.DateField(
         widget = DatePickerInput(format='%m/%d/%Y'),
         label = _("Date of Birth"),
@@ -85,6 +88,7 @@ class UserProfileUpdateForm(forms.ModelForm):
 
 
 class UserAvatarForm(forms.ModelForm):
+    """Form to allow users to update their avatar"""
     avatar = forms.ImageField(widget=forms.FileInput)
     class Meta:
         model = models.UserProfile
@@ -92,6 +96,7 @@ class UserAvatarForm(forms.ModelForm):
 
 
 class CropAvatarForm(forms.Form):
+    """Form to allow users to crop their avatar"""
     x = forms.FloatField(widget=forms.HiddenInput())
     y = forms.FloatField(widget=forms.HiddenInput())
     width = forms.FloatField(widget=forms.HiddenInput())
